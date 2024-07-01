@@ -13,7 +13,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
     lsb-release \
     software-properties-common \
     unzip \
-    wget
+    gnupg \
+    
 
 #RUN DEBIAN_FRONTEND=noninteractive 
 
@@ -35,7 +36,20 @@ RUN apt-get update && \
 RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/powershell_7.4.2-1.deb_amd64.deb %% \
     dpkg -i powershell_7.4.2-1.deb_amd64.deb && apt-get install -f && rm powershell_7.4.2-1.deb_amd64.deb
 
-RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+RUN sudo mkdir -p /etc/apt/keyrings \
+    curl -sLS https://packages.microsoft.com/keys/microsoft.asc |  sudo gpg --dearmor > /etc/apt/keyrings/microsoft.gpg \
+    sudo chmod go+r /etc/apt/keyrings/microsoft.gpg \
+    AZ_DIST=$(lsb_release -cs) \
+    echo "Types: deb \
+    URIs: https://packages.microsoft.com/repos/azure-cli/ \
+    Suites: ${AZ_DIST} \
+    Components: main \
+    Architectures: $(dpkg --print-architecture) \
+    Signed-by: /etc/apt/keyrings/microsoft.gpg" | sudo tee /etc/apt/sources.list.d/azure-cli.sources \
+    sudo apt-get update
+    sudo apt-get install azure-cli
+
+#RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash 
 
 # Can be 'linux-x64', 'linux-arm64', 'linux-arm', 'rhel.6-x64'.
 ENV TARGETARCH=linux-x64
