@@ -34,7 +34,7 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
 RUN apt-get update && \
     apt-get install azure-cli
 
-RUN wget wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.3/powershell_7.4.3-1.deb_amd64.deb \
+RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.3/powershell_7.4.3-1.deb_amd64.deb \
     dpkg -i powershell_7.4.3-1.deb_amd64.deb && apt-get install -f && rm powershell_7.4.3-1.deb_amd64.deb
 
 #RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash 
