@@ -22,7 +22,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
 
 #RUN DEBIAN_FRONTEND=noninteractive
 
-RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.3/powershell_7.4.3-1.deb_amd64.deb && dpkg -i powershell_7.4.3-1.deb_amd64.deb && apt-get install -f && rm powershell_7.4.3-1.deb_amd64.deb
+RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.3/powershell_7.4.3-1.deb_amd64.deb && \
+    dpkg -i powershell_7.4.3-1.deb_amd64.deb && \
+    apt-get install -f && \
+    rm powershell_7.4.3-1.deb_amd64.deb && \
+    pwsh -Command "Install-Module -Name Az.Accounts, Az.Resources, Az.Storage -Force"
 
 # Installer Azure CLI
 RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | \
