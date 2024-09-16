@@ -17,7 +17,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
     p7zip-full \
     p7zip-rar \
     gnupg \
-    wget
+    wget \
+    python3-pip
 
 RUN pip3 install --upgrade certifi==2023.07.22
     
