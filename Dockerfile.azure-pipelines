@@ -18,6 +18,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
     p7zip-rar \
     gnupg \
     wget
+
+RUN pip install --upgrade certifi==2023.07.22
     
 
 #RUN DEBIAN_FRONTEND=noninteractive
