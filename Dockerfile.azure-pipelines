@@ -44,7 +44,7 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
 RUN apt-get update && \
-    apt-get install azure-cli
+    apt-get install azure-cli azcopy
 
 
 
