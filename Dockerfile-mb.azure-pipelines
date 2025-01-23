@@ -1,4 +1,5 @@
-FROM acrcontainerregistry.azurecr.io/ubuntu:22.04
+ARG REGISTRY_NAME
+FROM ${REGISTRY_NAME}/ubuntu:22.04
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
